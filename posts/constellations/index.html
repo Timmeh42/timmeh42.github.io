@@ -29,7 +29,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-image: radial-gradient(circle at top, #dfccb4, #423b30);
+  background-image: radial-gradient(circle at top, #dfccb4, #463924);
   background-color: #423b30;
   background-attachment: fixed;
   font-family: 'Timtura', sans-serif; }
@@ -61,7 +61,7 @@ h1 {
   font-family: 'Goudy Bookletter 1911', serif;
   font-weight: normal;
   font-size: 1.75rem;
-  text-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2), 0 2px 2px white; }
+  text-shadow: 0 -1px 2px rgba(0, 0, 0, 0.3), 0 2px 2px white; }
   h1 > a::after {
     content: '';
     position: absolute;
@@ -89,18 +89,17 @@ a {
   a:visited {
     color: #6a420f; }
   a:hover, a:focus {
-    color: #a2610f;
+    color: #8b5a10;
     text-decoration-style: solid; }
   a:active {
-    color: #a2610f; }
+    color: #8b5a10; }
 
 .article-card {
-  background: white;
-  background-image: linear-gradient(#f7ede9, #e1d8d0);
+  background: #f0edea;
   border: 2px solid;
   border-color: #ffffff #e8e8e8 #98999f;
   box-shadow: 0 1em 2em rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.2s;
+  transition: all 0.2s;
   width: 25rem;
   height: 18rem;
   flex: 0 1 auto;
@@ -134,6 +133,7 @@ a {
     top: 10rem; }
   @media (min-width: 27rem) {
     .article-card {
+      padding: 1.5rem 2rem;
       margin-bottom: 1rem; } }
   @media (min-width: 54rem) {
     .article-card {
@@ -143,13 +143,23 @@ a {
       .article-card:nth-child(n) {
         top: unset; } }
   .article-card > p > img {
-    width: 50%;
+    width: 45%;
+    height: 45%;
     object-fit: cover;
     float: right;
     margin-left: 0.5rem;
     border: 1px dashed #888; }
+    @media (min-width: 27rem) {
+      .article-card > p > img {
+        width: 45%;
+        height: 45%;
+        margin-left: 1rem; } }
   @media (min-width: 54rem) {
     .article-card.title-link:hover {
+      width: 25.3rem;
+      height: 18.3rem;
+      padding: 1.65rem 2.15rem;
+      margin: 0.85rem;
       box-shadow: 0 2.9px 2.9px rgba(0, 0, 0, 0.056), 0 7px 7px rgba(0, 0, 0, 0.081), 0 13.1px 13.1px rgba(0, 0, 0, 0.1), 0 23.5px 23.5px rgba(0, 0, 0, 0.119), 0 43.9px 43.9px rgba(0, 0, 0, 0.144), 0 105px 105px rgba(0, 0, 0, 0.2); } }
 
 .article-post {
@@ -157,14 +167,17 @@ a {
   max-width: 40rem;
   padding: 1rem;
   margin: 2rem auto;
-  background-image: linear-gradient(#f7ede9, #e1d8d0);
+  background: #f0edea;
   border: 2px solid;
   border-radius: 0.25rem;
   border-color: #ffffff #e8e8e8 #98999f;
   box-shadow: 0 1em 2em rgba(0, 0, 0, 0.5); }
   @media (min-width: 54rem) {
     .article-post {
+      padding: 1rem 2rem 1.5rem;
       box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.056), 0 3.5px 3.5px rgba(0, 0, 0, 0.081), 0 6.6px 6.6px rgba(0, 0, 0, 0.1), 0 11.8px 11.8px rgba(0, 0, 0, 0.119), 0 22.1px 22.1px rgba(0, 0, 0, 0.144), 0 53px 53px rgba(0, 0, 0, 0.2); } }
+  .article-post > p:first-child {
+    margin-bottom: 0; }
   .article-post > p > img {
     width: 100%;
     border: 1px dashed #888;
@@ -194,11 +207,11 @@ a {
       max-width: 27rem; } }
   @media (min-width: 54rem) {
     .card-container {
-      max-width: 54rem;
+      max-width: 54.1rem;
       padding-top: 3rem; } }
   @media (min-width: 81rem) {
     .card-container {
-      max-width: 81rem; } }
+      max-width: 81.1rem; } }
 
     </style>
 </head>
