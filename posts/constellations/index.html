@@ -23,7 +23,8 @@
   font-display: swap; }
 
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  line-height: 1.4; }
 
 html {
   background-image: linear-gradient(to right, #463924, #4d3e29, #463924);
@@ -83,7 +84,6 @@ h1 {
 
 p {
   font-size: 0.825rem;
-  line-height: 1.4;
   margin-top: 0; }
   p:last-child {
     margin-bottom: 0; }
@@ -92,10 +92,14 @@ p {
       font-size: 1rem; } }
 
 ul {
-  font-size: 0.825rem; }
+  font-size: 0.825rem;
+  padding-left: 1.5rem; }
   @media (min-width: 27rem) {
     ul {
       font-size: 1rem; } }
+
+li {
+  margin-bottom: 0.5rem; }
 
 a {
   color: #6a420f;
@@ -249,6 +253,41 @@ a {
 I don't know the real name for it, so I call it &quot;constellations&quot; as it looks
 like stars connected to form abstract shapes. For a better impression
 <a href="/demos/constellations/index.html">open the demo in full screen view.</a></p>
+<p>My first attempt at replicating it was quite innefficient, (although I did
+use techniquies such as keeping the stars in a grid that limited the number
+of neighbouring stars they had to each loop through) so over time I made a
+few improvements and learnt a few quirks of Canvas 2d drawing along the way:</p>
+<ul>
+<li>At first I had been clearing the canvas with <code>clearRect</code>; this sets an area
+of pixels to <code>rgba(0,0,0,0)</code> (transparent black). I then drew semi-transparent
+lines over that, which becomes slow due to the browser having to repeatedly
+mix two different transparent colours together as the lines get drawn.
+It turned out to be faster to fill the canvas with solid white, which was
+faster to draw transparent colour onto.</li>
+<li>The next improvement I made was to swap from concatenating a string of
+<code>rgba()</code> values to keeping a constant black colour and only manipulating the
+global alpha of the drawing context. This meant not having to concatenate a
+string and values for every line drawn, but also not making the browser parse
+that string into a colour. Global alpha is also set directly with a number,
+without mucking about with strings, which is another bit of efficiency.</li>
+<li>The transparency of the lines drawn varies based on distance between points;
+further away stretches the line thin until it disappears completely. I was
+using alpha transparency to accomplish this, but found that it was faster
+to literally draw thinner lines at solid black. Presumably the same line drawing
+algorithm is used whether the lines are 1px wide or not, which means removing
+transparency can only speed things up.</li>
+<li>Finally, I had implemented some interaction by making the &quot;stars&quot; dodge away
+from the mouse cursor if they were too close. Due to the inherent delay in
+passing mouse inputs through to the program, this felt a little laggy. However,
+at the time I was reading the mouse position, updating star positions, and then
+moving any stars that were too close to the mouse. This effectively meant they
+were reacting to where the mouse was on the previous frame - if instead I
+detected mouse proximity <em>before</em> updating the stars from their own velocity,
+I effectively removed 1 frame of mouse lag, which can feel like a big difference.</li>
+</ul>
+<p>Of course, all of these changes are rather inconsequential against what could be
+the biggest improvement: rewriting the rendering to use webGL instead of canvas
+operations. At the moment, however, I'm happy to let it stay as it is.</p>
 
 </article>
     <footer>
